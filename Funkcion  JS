@@ -1,0 +1,272 @@
+/* global cy */
+'use strict';
+
+import {config} from '../../configs/config';
+
+/**
+ * Dodawanie nowego praconwika - podstawowe informacje (facet)
+ */
+export const commonDataMale = () => {
+    cy.get('input[id="StaffEmployeeFirstname"]')
+        .insertText('meskie imie');
+    cy.get('input[id="StaffEmployeeLastname"]')
+        .insertText('NAZWISKO');
+    cy.get('input[id="StaffEmployeeLastname"]')
+        .insertText('DRUGIE IMIE');
+    cy.get('input[id="StaffEmployeePesel"]')
+        .insertText('48050813894');
+    cy.get('input[id="StaffEmployeeNip"]')
+        .insertText('8180163020');
+};
+
+/**
+ * Dodawanie nowego praconwika - podstawowe informacje (kobieta)
+ */
+export const commonDataFemale = () => {
+    cy.get('input[id="StaffEmployeeFirstname"]')
+        .insertText('Kobiece imię');
+    cy.get('input[id="StaffEmployeeLastname"]')
+        .insertText('NAZWISKO');
+    cy.get('input[id="StaffEmployeeLastname"]')
+        .insertText('DRUGIE IMIE');
+    cy.get('input[id="StaffEmployeePesel"]')
+        .insertText('75010310621');
+    cy.get('input[id="StaffEmployeeNip"]')
+        .insertText('8180163020');
+};
+
+/**
+ * Dodawanie nowego praconwika - podstawowe informacje (student)
+ */
+export const commonDataMaleStudent = () => {
+    cy.get('input[id="StaffEmployeeFirstname"]');
+        cy.insertText('meskie imie');
+    cy.get('input[id="StaffEmployeeLastname"]')
+        .insertText('NAZWISKO');
+    cy.get('input[id="StaffEmployeeLastname"]')
+        .insertText('DRUGIE IMIE');
+    cy.get('input[id="StaffEmployeePesel"]')
+        .insertText('97042811194');
+    cy.get('input[id="StaffEmployeeNip"]')
+        .insertText('8180163020');
+};
+
+/**
+ * Dodawanie nowego praconwika - podstawowe informacje (kobieta po 55 roku życia)
+ */
+export const commonDataFemaleOver55 = () => {
+    cy.get('input[id="StaffEmployeeFirstname"]')
+        .insertText('Kobiece imię');
+    cy.get('input[id="StaffEmployeeLastname"]')
+        .insertText('NAZWISKO');
+    cy.get('input[id="StaffEmployeeLastname"]')
+        .insertText('DRUGIE IMIE');
+    cy.get('input[id="StaffEmployeePesel"]')
+        .insertText('58122912743');
+    cy.get('input[id="StaffEmployeeNip"]')
+        .insertText('8180163020');
+};
+
+/**
+ * Wypełnia szczegółowe informacje
+ */
+export const staffEmployeeEntryFromPoland = () => {
+    cy.get('input[id="StaffEmployeeParentname"]')
+        .insertText('nazwisko rodowe');
+    cy.get('input[id="StaffEmployeeFathername"]')
+        .insertText('imię ojca');
+    cy.get('input[id="StaffEmployeeMothername"]')
+        .insertText('imię matki');
+    cy.get('input[id="StaffEmployeeBirthPlace"]')
+        .insertText('58122912743');
+    cy.get('input[id="StaffEmployeeIdentityCard"]')
+        .insertText('8180163020');
+    cy.get("StaffEmployeePassportCountry").parent()
+        .selectOption('Polska');
+    cy.get('input[id="StaffEmployeePassport"]')
+        .insertText('HELL666');
+    cy.get('input[id="StaffEmployeeBankName"]')
+        .insertText('Świnka skarbonka');
+    cy.get('input[id="StaffEmployeeBankAccount"]')
+        .insertText('123456789Bank123456789');
+    cy.get('input[id="StaffEmployeeEmail"]')
+        .insertText('adres@wfirma.pl');
+    cy.get('input[id="StaffEmployeePhone"]')
+        .insertText('123456789');
+};
+
+/**
+ * Wypełnia szczegółowe informacje - z poza kraju
+ */
+export const staffEmployeeEntryFromOtherCountry = () => {
+    cy.get('input[id="StaffEmployeeParentname"]')
+        .insertText('Kobiece imię');
+    cy.get('input[id="StaffEmployeeFathername"]')
+        .insertText('NAZWISKO');
+    cy.get('input[id="StaffEmployeeMothername"]')
+        .insertText('DRUGIE IMIE');
+    cy.get('input[id="StaffEmployeeBirthPlace"]')
+        .insertText('58122912743');
+    cy.get('input[id="StaffEmployeeCitizenship"]')
+        .insertText('chińskie');
+    cy.get('input[id="StaffEmployeeIdentityCard"]')
+        .insertText('8180163020');
+    cy.get("StaffEmployeePassportCountry").parent()
+        .selectOption('Chiny');
+    cy.get('input[id="StaffEmployeePassport"]')
+        .insertText('HELL666');
+    cy.get('input[id="StaffEmployeeBankName"]')
+        .insertText('Świnka skarbonka');
+    cy.get('input[id="StaffEmployeeBankAccount"]')
+        .insertText('123456789Bank123456789');
+    cy.get('input[id="StaffEmployeeEmail"]')
+        .insertText('adres@wfirma.pl');
+    cy.get('input[id="StaffEmployeePhone"]')
+        .insertText('123456789');
+    
+    /**
+     * Wybór i dodanie działu firmy
+     */
+    export const ChooseCompanyDivision = () => {
+        cy.selectOption('Nowy dział');
+        cy.get('.ui-dialog input#CompanyDivisionName').then(($check) => {
+            if (!$check.text().includes('')) {
+                cy.get('.ui-dialog input#CompanyDivisionName')
+                    .type('Sosnowiec');
+            }
+            cy.get('.ui-dialog input#CompanyDivisionShortName').then(() => {
+                if (!$check.text().includes('')) {
+                    cy.get('.ui-dialog input#CompanyDivisionShortName')
+                        .type('SOS');
+                }
+            });
+        })
+    };
+    
+    /**
+     * Wypełnia dane adresowe
+     */
+    export const staffEmployeeAdressFromPoland = () => {
+        cy.get('input[id="AddressStaffEmployeeLiveZip"]')
+            .insertText('51166');
+        cy.get('input[id="AddressStaffEmployeeLiveStreet"]')
+            .insertText('Bolesłąwa Krzywoustego');
+        cy.get('input[id="AddressStaffEmployeeLiveBuildingNumber"]')
+            .insertText('107');
+        cy.get('input[id="AddressStaffEmployeeLiveFlatNumber"]')
+            .insertText('A1');
+        cy.get('input[id="AddressStaffEmployeeLiveCity"]')
+            .insertText('Wrocław');
+        cy.get('input[id="AddressStaffEmployeeLivePost"]')
+            .insertText('Wrocław');
+        cy.get('input[id="AddressStaffEmployeeLiveCommune"]')
+            .insertText('Wrocław');
+        cy.get('input[id="AddressStaffEmployeeLiveDistrict"]')
+            .insertText('Wrocław');
+        cy.get('input[id="StaffEmployeeEmail"]')
+            .insertText('adres@wfirma.pl');
+        cy.get('input[id="StaffEmployeePhone"]')
+            .insertText('123456789');
+        cy.get("AddressStaffEmployeeLiveVoivodeship").parent()
+            .selectOption('dolnośląskie');
+        cy.get("AddressStaffEmployeeLiveCountryCode").parent()
+            .selectOption('Polska');
+    };
+    
+    /**
+     * Wypełnia dane adresu zameldowania
+     */
+    export const staffEmployeeAdressOutOfPoland = () => {
+        cy.get('input[id="AddressStaffEmployeeMainZip"]')
+            .insertText('360000');
+        cy.get('input[id="AddressStaffEmployeeMainStreet"]')
+            .insertText('Bruse Lee');
+        cy.get('input[id="AddressStaffEmployeeMainBuildingNumber"]')
+            .insertText('66');
+        cy.get('input[id="AddressStaffEmployeeMainFlatNumber"]')
+            .insertText('6');
+        cy.get('input[id="AddressStaffEmployeeMainCity"]')
+            .insertText('Xiamen');
+        cy.get('input[id="AddressStaffEmployeeMainPost"]')
+            .insertText('Xiamen');
+        cy.get('input[id="AddressStaffEmployeeMainCommune"]')
+            .insertText('Xiamen');
+        cy.get('input[id="AddressStaffEmployeeMainDistrict"]')
+            .insertText('Xiamen');
+        cy.get('input[id="StaffEmployeeEmail"]')
+            .insertText('adres@wfirma.pl');
+        cy.get('input[id="StaffEmployeePhone"]')
+            .insertText('987654321');
+        cy.get("AddressStaffEmployeeMainVoivodeship").parent()
+            .selectOption('NIE DOTYCZY');
+        cy.get("AddressStaffEmployeeMainCountryCode").parent()
+            .selectOption('Chiny');
+    };
+    
+    /**
+     * Wypełnia dane adresu korespondencyjnego
+     */
+    export const staffEmployeeContactAdress = () => {
+        cy.get('input[id="AddressStaffEmployeeContactZip"]')
+            .insertText('51166');
+        cy.get('input[id="AddressStaffEmployeeContactStreet"]')
+            .insertText('Bolesłąwa Krzywoustego');
+        cy.get('input[id="AddressStaffEmployeeContactBuildingNumber"]')
+            .insertText('105');
+        cy.get('input[id="AddressStaffEmployeeContactFlatNumber"]')
+            .insertText('21');
+        cy.get('input[id="AddressStaffEmployeeContactCity"]')
+            .insertText('Wrocław');
+        cy.get('input[id="AddressStaffEmployeeContactPost"]')
+            .insertText('Wrocław');
+        cy.get('input[id="AddressStaffEmployeeContactCommune"]')
+            .insertText('Wrocław');
+        cy.get('input[id="AddressStaffEmployeeContactDistrict"]')
+            .insertText('Wrocław');
+        cy.get('input[id="StaffEmployeeEmail"]')
+            .insertText('adres@wfirma.pl');
+        cy.get('input[id="StaffEmployeePhone"]')
+            .insertText('987654321');
+        cy.get("AddressStaffEmployeeContactVoivodeship").parent()
+            .selectOption('dolnośląskie');
+        cy.get("AddressStaffEmployeeContactCountryCode").parent()
+            .selectOption('Polska');
+    };
+};
+
+    /**
+    * Checkbox - taki sam jak adres zamieszkania (odznaczenie)
+    */
+    export const CheckBoxAddressStaffEmployeeMainSameAsMain = () => {
+        cy.get("AddressStaffEmployeeMainSameAsMain").parent()
+            .radioCheck()
+    };
+    /**
+    * Checkbox - taki sam jak adres zamieszkania (odznaczenie)
+    */
+    export const CheckBoxAddressStaffEmployeeContactSameAsMain = () => {
+        cy.get("AddressStaffEmployeeContactSameAsMain").parent()
+            .radioCheck()
+};
+/**
+ * Wypełnia dane z zakąłdki ZUS i US
+ */
+export const staffEmployeeZusAndUSComplited = () => {
+    cy.get("StaffEmployeeInsuranceIdentityType").parent()
+        .selectOption('');
+    cy.get("StaffEmployeeTaxIdentityType").parent()
+        .selectOption('Polska');
+    cy.get("StaffEmployeeNfzCode").parent()
+        .selectOption('Polska');
+    cy.get('input[id="StaffEmployeeTaxDepartmentName"')
+        .click();
+    cy.contains('szukaj')
+        .click()
+        .insertTekst('URZĄD SKARBOWY W JELENIEJ GÓRZE')
+        .click()
+        .type({enter});
+    cy.get("StaffEmployeeInsuranceCodeRetiring")
+        .selectOption("1");
+    cy.get("StaffEmployeeInsuranceCodeDisabled")
+        .selectOption("1")
+};
